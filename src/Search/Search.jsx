@@ -60,13 +60,13 @@ class Search extends Component {
               const colors = ['red', 'green', 'pink', 'yellow'];
               
               return (
-                  <div>
+                  <div className="data-table">
                       <MUIDataTable
                       title={"Query Results"}
                       data={dataForTable}
                       columns={columnHeaders}
                       />
-                    <ScatterChart width={800} height={600} margin={{top: 20, right: 20, bottom: 20, left: 20}}>
+                    <ScatterChart width={700} height={600} margin={{top: 20, right: 20, bottom: 20, left: 20}}>
                         <XAxis type="number" dataKey={'x'} name='Funding'/>
                         <YAxis type="number" dataKey={'y'} name='Probability'/>
                         <ZAxis type="category" dataKey={'z'} name="Company" />
