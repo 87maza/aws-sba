@@ -4,6 +4,7 @@ import Button from '@material-ui/core/Button'
 import Icon from '@material-ui/core/Icon';
 import axios from 'axios'
 import MUIDataTable from "mui-datatables";
+import {ScatterChart, Scatter, Cell, XAxis, YAxis, ZAxis, CartesianGrid, Tooltip, Legend} from 'recharts'
 
 
 import SearchContainer from '../containers/SearchContainer'
@@ -48,10 +49,16 @@ class Search extends Component {
   render() {
       const checker = (data) => {
           if(Object.keys(data).length > 0) {
-              const columnHeaders = ['Company', 'Succes %', 'Award']
+              const columnHeaders = ['Company', 'Success', 'Award', 'Initial Application']
               let untouchedData = data.data
+              const dataForTable = untouchedData.map(item => [item.company, `${(item.probability * 100).toFixed(2)} %`, `$${(item.award).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}`, `${item.abstract.substr(0,200)}...`])
+            console.log(dataForTable)
+              let untouchedScatter = data.data
+              const scatterData = untouchedScatter.map(item => {
+                return {x: item.award, y: (item.probability * 100).toFixed(2), z: item.company}
+              })
+              const colors = ['red', 'green', 'pink', 'yellow'];
               
-              const dataForTable = untouchedData.map(item => [item.company, `${(item.probability * 100).toFixed(2)} %`, item.award])
               return (
                   <div>
                       <MUIDataTable
@@ -59,6 +66,19 @@ class Search extends Component {
                       data={dataForTable}
                       columns={columnHeaders}
                       />
+                    <ScatterChart width={800} height={600} margin={{top: 20, right: 20, bottom: 20, left: 20}}>
+                        <XAxis type="number" dataKey={'x'} name='Funding'/>
+                        <YAxis type="number" dataKey={'y'} name='Probability'/>
+                        <ZAxis type="category" dataKey={'z'} name="Company" />
+                        <CartesianGrid />
+                        <Tooltip cursor={{strokeDasharray: '3 3'}}/>
+                        <Scatter name='DARWIN' data={scatterData} fill='#8884d8'>
+                        {scatterData.map((entry, index) => {
+                            return <Cell key={`cell-${index}`} fill={colors[index % colors.length]} className="hello" height={20} width={20}/>
+                            })
+                        }
+                        </Scatter>
+                    </ScatterChart>
                   </div>
               )
           }
