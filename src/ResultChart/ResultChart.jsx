@@ -3,7 +3,6 @@ import SearchHeader from '../SearchHeader/SearchHeader'
 import { Subscribe } from 'unstated';
 
 import SearchContainer from '../containers/SearchContainer'
-import Search from '../Search/Search';
 
 class ResultChart extends Component {
     constructor(props) {
