@@ -34,6 +34,11 @@ class Search extends Component {
             query
         }, ()=>{console.log('regular', this.state.query)})   
     }
+    quickSubmit(event) {
+        if(event.ctrlKey && event.keyCode === 13) {
+            this.handleSearch(event.target.value)
+        }
+    }
     renderDataTable(data) {
         if(!data) {
             return "waiting for data table"
@@ -89,10 +94,13 @@ class Search extends Component {
     return (
         <div className="search-component-container">
             <div className="header-tag-line">
-                <img src={require("../aws_title.jpg")} alt="aws-logo" height="150px" width="700px" />
-                <p>
-                    AWS SBA LETS PLAY.
-                </p>
+                <img src={require("../aws_title.jpg")} alt="aws-logo" height="145px" width="700px" />
+                <div className="header-line">
+                    <h2>Team Darwin</h2>
+                    <p>
+                        AWS SBA LETS PLAY.
+                    </p>
+                </div>
             </div>
             <div className="haha">
                 <div className="search-container">
@@ -101,10 +109,12 @@ class Search extends Component {
                     label="What're you looking for?"
                     placeholder="This is a multi-line search engine, enter multiple thoughts"
                     multiline
+                    autoFocus={true}
                     margin="normal"
                     variant="outlined"
                     className="text-input-styles"
                     onChange={(e) => this.handleInputChange(e.target.value)}
+                    onKeyDown={(e) => this.quickSubmit(e)}
                     />
                     <Button variant="contained"  color="primary" onClick={() => this.handleSearch(this.state.query)}>
                         <Icon>search</Icon>

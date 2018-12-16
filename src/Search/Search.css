@@ -21,3 +21,10 @@
     display: flex;
     margin: 20px;
 }
+
+.header-line > h2 {
+    margin: 0;
+}
+.header-line > p {
+    margin: 0;
+}
