@@ -1,0 +1,18 @@
+.text-input-styles {
+    width: 700px;
+}
+
+.search-container {
+    width: 700px;
+    display: flex;
+    flex-direction: column;
+}
+
+.header-tag-line {
+    text-align: center;
+}
+.haha {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

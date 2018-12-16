@@ -1,26 +1,20 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+
+import Search from './Search/Search'
 import './App.css';
+import { Route } from "react-router-dom";
+import ResultChart from './ResultChart/ResultChart';
+import { Provider } from 'unstated';
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            AWS SBA LETS PLAY.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
+      <Provider>
+        <div className="app">
+            <Route exact path="/" component={Search} />
+            <Route path="/results/" component={ResultChart} />
+        </div>
+      </Provider>
     );
   }
 }
